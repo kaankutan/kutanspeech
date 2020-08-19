@@ -1,5 +1,5 @@
 # kutanspeech
-Word by word speech recognition.
+Word by word Speech Recognition Library.
 
 ```py
 from kutanspeech import *
