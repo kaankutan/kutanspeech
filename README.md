@@ -1,12 +1,16 @@
 # kutanspeech
 Word by word Speech Recognition Library.
+</br>
+
+![alt text](https://i.hizliresim.com/R83tYd.png)
+</br>
 
 ```py
 from kutanspeech import *
 
 ks = kutanspeech()
 ks.noice_optimizer()
-print("Optimize is complicated. Listening.")
+print("Noice optimized. Listening...")
 
 data = ks.listen()
 try:
@@ -21,7 +25,7 @@ from kutanspeech import *
 import time
 ks = kutanspeech()
 ks.noice_optimizer()
-print("Optimize is complicated. Listening..")
+print("Noice optimized. Listening...")
 
 def callback(data):
     try:
