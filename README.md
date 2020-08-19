@@ -1,7 +1,6 @@
 # kutanspeech
 Word by word Speech Recognition Library.
-[url=https://hizliresim.com/R83tYd][img]https://i.hizliresim.com/R83tYd.png[/img][/url]
-
+![alt text](https://i.hizliresim.com/R83tYd.png)
 ```py
 from kutanspeech import *
 
