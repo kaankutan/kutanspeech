@@ -4,6 +4,7 @@ Word by word Speech Recognition Library.
 </br>
 ![alt text](https://i.hizliresim.com/R83tYd.png)
 </br>
+
 ```py
 from kutanspeech import *
 
