@@ -66,7 +66,7 @@ class kutanspeech():
         self._THRESHOLD = self._recognizer.energy_threshold
 
     def background_listener(self, callback, sec_for_pause = 0.1, callback_block = False):
-        def stop(): listening_is_active = False
+        def stopper(): listening_is_active = False
         listening_is_active = True
 
         def listen_thread():
