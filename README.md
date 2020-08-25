@@ -2,7 +2,7 @@
 Word by word Speech Recognition Library.
 </br>
 
-For install;
+<h3>For install;</h3>
 </br>
 
 `pip install KutanSpeech`
