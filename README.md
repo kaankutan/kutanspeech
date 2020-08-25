@@ -1,4 +1,4 @@
-# kutanspeech
+# KutanSpeech
 Word by word Speech Recognition Library.
 </br>
 
