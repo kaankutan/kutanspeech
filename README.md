@@ -2,6 +2,10 @@
 Word by word Speech Recognition Library.
 </br>
 
+For install;
+`python setup.py install`
+</br>
+
 ![alt text](https://i.hizliresim.com/R83tYd.png)
 </br>
 
@@ -69,6 +73,7 @@ def callback(data):
         print(text)
     except ks.UnknownValueError:
         pass
+        
     except ks.RequestError:
         print("Internet connection could not be established")
 
