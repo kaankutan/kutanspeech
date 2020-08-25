@@ -11,7 +11,10 @@ Word by word Speech Recognition Library.
 `pip install KutanSpeech`
 </br>
 
-### Word by word listener example
+### Word by word listener
+
+This sample actively previews your voice.
+</br>
 
 ```py
 import KutanSpeech as ks
@@ -36,7 +39,11 @@ except ks.TimeoutError:
 `timeout_sec` is not a mandatory parameter.
 </br>
 
-### Listener example
+### Listener
+
+This example records and translate to text.
+
+</br>
 
 ```py
 import KutanSpeech as ks
@@ -63,6 +70,8 @@ except ks.RequestError:
 </br>
 
 ### Background listener example
+This example listens to your voice in the background and when it detects a word, it sends the audio data to the callback function.
+</br>
 
 ```py
 import KutanSpeech as ks
