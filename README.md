@@ -69,7 +69,7 @@ except ks.RequestError:
 `timeout_sec` is not a mandatory parameter.
 </br>
 
-### Background listener example
+### Background listener
 This example listens to your voice in the background and when it detects a word, it sends the audio data to the callback function.
 </br>
 
