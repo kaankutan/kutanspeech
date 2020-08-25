@@ -5,7 +5,7 @@ import speech_recognition as sr
 from threading import Thread
 
 
-class Kutan_Speech():
+class KutanSpeech():
     class TimeoutError(Exception): pass
 
     class RequestError(Exception): pass
