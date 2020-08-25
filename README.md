@@ -11,7 +11,7 @@ Word by word Speech Recognition Library.
 ![alt text](https://i.hizliresim.com/R83tYd.png)
 </br>
 
-Word by word listener example;
+<h3>Word by word listener example;</h3>
 ```py
 import KutanSpeech as ks
 
@@ -35,7 +35,7 @@ except ks.TimeoutError:
 `timeout_sec` is not a mandatory parameter.
 </br>
 
-Listener example;
+<h3>Listener example;</h3>
 ```py
 import KutanSpeech as ks
 
@@ -60,7 +60,7 @@ except ks.RequestError:
 `timeout_sec` is not a mandatory parameter.
 </br>
 
-Background listener example;
+<h3>Background listener example;</h3>
 ```py
 import KutanSpeech as ks
 import time
