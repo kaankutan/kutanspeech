@@ -13,7 +13,7 @@ Word by word Speech Recognition Library.
 
 ### Word by word listener
 
-This sample actively previews your voice. And shows the full sentence when you finish speaking
+This sample actively previews your voice. And shows the full sentence when you finish speaking.
 </br>
 
 ```py
