@@ -42,7 +42,6 @@ except ks.TimeoutError:
 ### Listener
 
 This example records and translate to text.
-
 </br>
 
 ```py
