@@ -19,8 +19,10 @@ def callback(text):
 try:
     text = ks.wordbyword_listen(callback=callback)
     print("Sentence: "+text)
+    
 except ks.UnknownValueError:
     print("Not understood")
+    
 except ks.TimeoutError:
     print("Timeout error")
 ```
@@ -36,11 +38,14 @@ ks.noice_optimizer()
 print("Noice optimized. Listening...")
 
 data = ks.listen()
+
 try:
     print(ks.speech_to_text(data))
-except UnknownValueError:
+    
+except ks.UnknownValueError:
     print("Not understood")
-except RequestError:
+    
+except ks.RequestError:
     print("Internet connection could not be established")
 ```
 
@@ -49,7 +54,7 @@ Background listener example;
 import KutanSpeech
 import time
 
-ks = kutanspeech()
+ks = KutanSpeech()
 ks.noice_optimizer()
 print("Noice optimized. Listening...")
 
@@ -57,9 +62,9 @@ def callback(data):
     try:
         text = ks.speech_to_text(data)
         print(text)
-    except UnknownValueError:
+    except ks.UnknownValueError:
         pass
-    except RequestError:
+    except ks.RequestError:
         print("Internet connection could not be established")
 
 stopper = ks.background_listener(callback=callback)
