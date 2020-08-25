@@ -4,8 +4,8 @@ Word by word Speech Recognition Library.
 
 <h3>For install;</h3>
 </br>
-
 `pip install KutanSpeech`
+</br>
 </br>
 
 ![alt text](https://i.hizliresim.com/R83tYd.png)
