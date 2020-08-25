@@ -11,8 +11,7 @@ Word by word Speech Recognition Library.
 `pip install KutanSpeech`
 </br>
 
-<h3>Word by word listener example;</h3>
-</br>
+### Word by word listener example
 
 ```py
 import KutanSpeech as ks
@@ -37,8 +36,7 @@ except ks.TimeoutError:
 `timeout_sec` is not a mandatory parameter.
 </br>
 
-<h3>Listener example;</h3>
-</br>
+### Listener example
 
 ```py
 import KutanSpeech as ks
@@ -64,8 +62,7 @@ except ks.RequestError:
 `timeout_sec` is not a mandatory parameter.
 </br>
 
-<h3>Background listener example;</h3>
-</br>
+### Background listener example
 
 ```py
 import KutanSpeech as ks
