@@ -12,6 +12,8 @@ Word by word Speech Recognition Library.
 </br>
 
 <h3>Word by word listener example;</h3>
+</br>
+
 ```py
 import KutanSpeech as ks
 
@@ -36,6 +38,8 @@ except ks.TimeoutError:
 </br>
 
 <h3>Listener example;</h3>
+</br>
+
 ```py
 import KutanSpeech as ks
 
@@ -61,6 +65,8 @@ except ks.RequestError:
 </br>
 
 <h3>Background listener example;</h3>
+</br>
+
 ```py
 import KutanSpeech as ks
 import time
