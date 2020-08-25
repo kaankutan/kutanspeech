@@ -1,1 +1,1 @@
-from KutanSpeech import KutanSpeech
+from KutanSpeech.KutanSpeech import KutanSpeech
