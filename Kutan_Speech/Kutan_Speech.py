@@ -3,25 +3,24 @@ from array import array
 import pyaudio
 import speech_recognition as sr
 from threading import Thread
-import wave
 
 
-class TimeoutError(Exception): pass
+class Kutan_Speech():
+    class TimeoutError(Exception): pass
 
-class RequestError(Exception): pass
+    class RequestError(Exception): pass
 
-class UnknownValueError(Exception): pass
+    class UnknownValueError(Exception): pass
 
-class kutanspeech():
     def __init__(self, RATE = 44100, FORMAT = pyaudio.paInt16, CHUNK_SIZE = 1024, THRESHOLD = 300):
         self._recognizer = sr.Recognizer()
-        self._THRESHOLD = 300
+        self.THRESHOLD = 300
         self._CHUNK_SIZE = CHUNK_SIZE
         self._FORMAT = FORMAT
         self._RATE = RATE
 
     def __is_silent(self, snd_data):
-        return max(snd_data) < self._THRESHOLD
+        return max(snd_data) < self.THRESHOLD
 
     def __normalize(self, snd_data):
         MAXIMUM = 16384
@@ -38,7 +37,7 @@ class kutanspeech():
             r = array('h')
 
             for i in snd_data:
-                if not snd_started and abs(i)>self._THRESHOLD:
+                if not snd_started and abs(i)>self.THRESHOLD:
                     snd_started = True
                     r.append(i)
 
@@ -60,12 +59,12 @@ class kutanspeech():
         r.extend(silence)
         return r
 
-    def noice_optimizer(self):
+    def noice_optimizer(self, duration = 1):
         with sr.Microphone() as source:
-            self._recognizer.adjust_for_ambient_noise(source)
-        self._THRESHOLD = self._recognizer.energy_threshold
+            self._recognizer.adjust_for_ambient_noise(source, duration=duration)
+        self.THRESHOLD = self._recognizer.energy_threshold * duration + 50
 
-    def background_listener(self, callback, sec_for_pause = 0.05, callback_block = False):
+    def background_listener(self, callback, sec_for_pause = 0.15, callback_block = False):
         def stopper(): listening_is_active = False
         listening_is_active = True
 
@@ -83,11 +82,69 @@ class kutanspeech():
 
                 if not listening_is_active:
                     break
-            
+                    SystemExit
+
         Thread(target = listen_thread, daemon = True).start()
         return stopper
-        
-    def listen(self, timeout_sec = None, sec_for_stop = 0.8):
+
+    def wordbyword_listen(self, callback, timeout_sec = None, sec_for_stop = 2, language = "en-US"):
+        p = pyaudio.PyAudio()
+        self._thread_is_active = False
+        self._listen_is_finished = False
+        stream = p.open(format=self._FORMAT, channels=1, rate=self._RATE,
+            input=True, output=True,
+            frames_per_buffer=self._CHUNK_SIZE)
+        num_silent = 0
+        snd_started = False
+        timeout = 0
+        r = array('h')
+
+        def previewCallBack(data, callback):
+            try:
+                text = self.speech_to_text(data, language=language)
+                if not self._listen_is_finished:
+                    callback(text)
+                self._thread_is_active = False
+            except Exception:
+                self._thread_is_active = False
+
+        while True:
+            snd_data = array('h', stream.read(self._CHUNK_SIZE))
+            if byteorder == 'big':
+                snd_data.byteswap()
+            r.extend(snd_data)
+            silent = self.__is_silent(snd_data)
+
+            if silent and snd_started:
+                num_silent += 1
+
+            elif not silent and not snd_started:
+                snd_started = True
+
+            if timeout_sec:
+                if silent and not snd_started:
+                    timeout += 1
+                else:
+                    timeout = 0
+                if timeout > 32 * timeout_sec:
+                    raise TimeoutError("Listen has been timeout.")
+
+            if snd_started and num_silent > 32 * sec_for_stop:
+                self._listen_is_finished = True
+                sample_width = p.get_sample_size(self._FORMAT)
+                data = sr.AudioData(sample_width = sample_width, sample_rate = self._RATE, frame_data = r)
+                return self.speech_to_text(data, language=language)
+                break
+
+            elif snd_started and num_silent > 2 and not self._thread_is_active:
+                self._thread_is_active = True
+                sample_width = p.get_sample_size(self._FORMAT)
+                data = sr.AudioData(sample_width = sample_width, sample_rate = self._RATE, frame_data = r)
+                self.thread = Thread(target=previewCallBack, args={data, callback}, daemon = True)
+                self.thread.start()
+
+
+    def listen(self, timeout_sec = None, sec_for_stop = 1):
         p = pyaudio.PyAudio()
         stream = p.open(format=self._FORMAT, channels=1, rate=self._RATE,
             input=True, output=True,
@@ -117,7 +174,7 @@ class kutanspeech():
                     timeout = 0
                 if timeout > 32 * timeout_sec:
                     raise TimeoutError("Listen has been timeout.")
-                    
+
             if snd_started and num_silent > 32 * sec_for_stop:
                 break
 
