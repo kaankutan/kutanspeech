@@ -7,22 +7,22 @@ Word by word Speech Recognition Library.
 
 Word by word listener example;
 ```py
-import KutanSpeech
+import KutanSpeech as ks
 
-ks = KutanSpeech()
-ks.noice_optimizer()
+engine = ks.KutanSpeech()
+engine.noice_optimizer()
 print("Noice optimized. Listening...")
 
 def callback(text):
-    print("Preview: "text)
+    print("Preview: "+text)
 
 try:
-    text = ks.wordbyword_listen(callback=callback)
+    text = engine.wordbyword_listen(callback=callback, language="en", timeout_sec = 3)
     print("Sentence: "+text)
-    
+
 except ks.UnknownValueError:
     print("Not understood")
-    
+
 except ks.TimeoutError:
     print("Timeout error")
 ```
@@ -31,43 +31,48 @@ except ks.TimeoutError:
 
 Listener example;
 ```py
-import KutanSpeech
+import KutanSpeech as ks
 
-ks = KutanSpeech()
-ks.noice_optimizer()
+engine = ks.KutanSpeech()
+engine.noice_optimizer()
 print("Noice optimized. Listening...")
 
-data = ks.listen()
-
 try:
-    print(ks.speech_to_text(data))
-    
+    data = engine.listen(timeout_sec=3)
+    text = engine.speech_to_text(data)
+    print(text)
+
+except ks.TimeoutError:
+    print("Listening has been timeout")
+
 except ks.UnknownValueError:
     print("Not understood")
     
 except ks.RequestError:
     print("Internet connection could not be established")
 ```
+`timeout_sec` is not a mandatory parameter.
+</br>
 
 Background listener example;
 ```py
-import KutanSpeech
+import KutanSpeech as ks
 import time
 
-ks = KutanSpeech()
-ks.noice_optimizer()
+engine = ks.KutanSpeech()
+engine.noice_optimizer()
 print("Noice optimized. Listening...")
 
 def callback(data):
     try:
-        text = ks.speech_to_text(data)
+        text = engine.speech_to_text(data)
         print(text)
     except ks.UnknownValueError:
         pass
     except ks.RequestError:
         print("Internet connection could not be established")
 
-stopper = ks.background_listener(callback=callback)
+stopper = engine.background_listener(callback=callback)
 while True: time.sleep(0.1)
 stopper()
 ```
