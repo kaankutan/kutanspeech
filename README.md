@@ -2,14 +2,17 @@
 Word by word Speech Recognition Library.
 </br>
 
+![alt text](https://i.hizliresim.com/R83tYd.png)
+</br>
+
 <h3>For install;</h3>
 </br>
 `pip install KutanSpeech`
+
 </br>
 </br>
 
-![alt text](https://i.hizliresim.com/R83tYd.png)
-</br>
+
 
 <h3>Word by word listener example;</h3>
 </br>
