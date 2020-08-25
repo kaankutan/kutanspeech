@@ -1,1 +1,4 @@
 from KutanSpeech.KutanSpeech import KutanSpeech
+from KutanSpeech.KutanSpeech import TimeoutError
+from KutanSpeech.KutanSpeech import UnknownValueError
+from KutanSpeech.KutanSpeech import RequestError

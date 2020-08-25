@@ -2,16 +2,15 @@ from sys import byteorder
 from array import array
 import pyaudio
 import speech_recognition as sr
-from threading import Thread
+import threading
 
+class TimeoutError(Exception): pass
+
+class RequestError(Exception): pass
+
+class UnknownValueError(Exception): pass
 
 class KutanSpeech():
-    class TimeoutError(Exception): pass
-
-    class RequestError(Exception): pass
-
-    class UnknownValueError(Exception): pass
-
     def __init__(self, RATE = 44100, FORMAT = pyaudio.paInt16, CHUNK_SIZE = 1024, THRESHOLD = 300):
         self._recognizer = sr.Recognizer()
         self.THRESHOLD = 300
@@ -76,7 +75,7 @@ class KutanSpeech():
                     if callback_block:
                         callback(data)
                     else:
-                        Thread(target = callback, args={data}, daemon = True).start()
+                        threading.Thread(target = callback, args={data}, daemon = True).start()
                 except TimeoutError:
                     pass
 
@@ -84,7 +83,7 @@ class KutanSpeech():
                     break
                     SystemExit
 
-        Thread(target = listen_thread, daemon = True).start()
+        threading.Thread(target = listen_thread, daemon = True).start()
         return stopper
 
     def wordbyword_listen(self, callback, timeout_sec = None, sec_for_stop = 2, language = "en-US"):
@@ -140,7 +139,7 @@ class KutanSpeech():
                 self._thread_is_active = True
                 sample_width = p.get_sample_size(self._FORMAT)
                 data = sr.AudioData(sample_width = sample_width, sample_rate = self._RATE, frame_data = r)
-                self.thread = Thread(target=previewCallBack, args={data, callback}, daemon = True)
+                self.thread = threading.Thread(target=previewCallBack, args={data, callback}, daemon = True)
                 self.thread.start()
 
 
