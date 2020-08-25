@@ -3,7 +3,9 @@ Word by word Speech Recognition Library.
 </br>
 
 For install;
-`python setup.py install`
+</br>
+
+`pip install KutanSpeech`
 </br>
 
 ![alt text](https://i.hizliresim.com/R83tYd.png)
