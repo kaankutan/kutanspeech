@@ -8,7 +8,7 @@ setup(
   author = 'Mustafa Kaan Kutan',
   author_email = 'mkkwin10@gmail.com',
   url = 'https://github.com/kaankutan/kutanspeech',
-  download_url = 'https://github.com/kaankutan/KutanSpeech/archive/1.02.tar.gz',
+  download_url = 'https://github.com/kaankutan/KutanSpeech/archive/1.20.tar.gz',
   keywords = ['Wordbyword', 'Speech', 'Recognition', 'Library'],
   install_requires=[
           'SpeechRecognition',
