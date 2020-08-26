@@ -2,13 +2,13 @@ from distutils.core import setup
 setup(
   name = 'KutanSpeech',
   packages = ['KutanSpeech'],
-  version = '1.01',
+  version = '1.02',
   license = 'MIT',
   description = 'Word by word Speech Recognition Library.',
   author = 'Mustafa Kaan Kutan',
   author_email = 'mkkwin10@gmail.com',
   url = 'https://github.com/kaankutan/kutanspeech',
-  download_url = 'https://github.com/kaankutan/KutanSpeech/archive/1.01.tar.gz',
+  download_url = 'https://github.com/kaankutan/KutanSpeech/archive/1.02.tar.gz',
   keywords = ['Wordbyword', 'Speech', 'Recognition', 'Library'],
   install_requires=[
           'SpeechRecognition',

@@ -116,9 +116,12 @@ class KutanSpeech():
 
             if silent and snd_started:
                 num_silent += 1
-
+                
             elif not silent and not snd_started:
                 snd_started = True
+
+            elif not silent and snd_started:
+                num_silent = 0
 
             if timeout_sec:
                 if silent and not snd_started:
@@ -129,10 +132,10 @@ class KutanSpeech():
                     raise TimeoutError("Listen has been timeout.")
 
             if snd_started and num_silent > 32 * sec_for_stop:
-                self._listen_is_finished = True
                 sample_width = p.get_sample_size(self._FORMAT)
                 data = sr.AudioData(sample_width = sample_width, sample_rate = self._RATE, frame_data = r)
                 return self.speech_to_text(data, language=language)
+                self._listen_is_finished = True
                 break
 
             elif snd_started and num_silent > 2 and not self._thread_is_active:
@@ -162,9 +165,12 @@ class KutanSpeech():
 
             if silent and snd_started:
                 num_silent += 1
-
+                
             elif not silent and not snd_started:
                 snd_started = True
+
+            elif not silent and snd_started:
+                num_silent = 0
 
             if timeout_sec:
                 if silent and not snd_started:
